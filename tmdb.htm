@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>#movie{
+    display: grid;
+    grid-template-columns: repeat(4, 20%);
+    gap: 5%; 
+}
+img{
+    width: 60%;
+}</style>
+<body>
+    <div>
+        <!-- <input type="text" placeholder="search here" id="searchBar" oninput="searchMovie()"> -->
+        <div id="movie"></div>
+    </div>
+</body>
+</html>
+<script>
+    // let API_KEY = `8796761f365f22339c5a4afba8f4f14b`
+    let url = `https://api.themoviedb.org/3/discover/movie?&api_key=8796761f365f22339c5a4afba8f4f14b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=2`
+
+    let mainDiv = document.getElementById('movie')
+
+      async  function searchMovie(){
+            // let name = document.getElementById('searchBar').value
+            let response = await fetch(url)
+            let data = await response.json()
+            console.log(data)
+            return data.results
+
+            
+            let datas = await imgpath.json()
+            console.log(datas)
+        }
+        
+        async function showMovie(){
+            let showData = await searchMovie()
+            console.log(showData)
+            
+            showData.map(function(movies){
+                console.log(movies)
+                let poster = document.createElement('div')
+                let img = document.createElement('img')
+                const imgpath = movies.poster_path
+                 img.src = `https://image.tmdb.org/t/p/original/${imgpath}`
+                let title = document.createElement('p')
+                title.innerHTML = movies.title
+                
+               poster.append(img,title)
+               mainDiv.append(poster)
+
+            })
+        }
+        showMovie()
+
+</script>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="weather.css" />
+  </head>
+  <style></style>
+  <body>
+    <div class="weather"></div>
+    <div>
+      <div class="search">
+        <input
+          type="text"
+          name=""
+          id="city"
+          placeholder="Enter the city name"
+        />
+        <button onclick="weatherApiCall()">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+      <h5 id="ranjay"></h5>
+      <div class="sundegree">
+        <div>
+          <p><i class="fa-solid fa-sun fa-spin fa-xl" style="color: #f9f106"></i></p>
+        </div>
+        <div id="temp">24&deg;C</div>
+        <div class="wind">
+          <div id="wind">Wind: 13 kmph</div>
+          <div id="humidity">Humidity: 0</div>
+          <div id="pressure">Pressure: 1022mb</div>
+          <div id="dt"></div>
+        </div>
+      </div>
+      <br /><br />
+      <div class="weekDay">
+        <div>
+          <h6>SAT</h6>
+          <i class="fa-solid fa-cloud-sun-rain fa-beat"></i><br /><br />20&deg;C
+        </div>
+        <div>
+          <h6>SUN</h6>
+          <i class="fa-solid fa-cloud-sun fa-beat-fade"></i><br /><br />20&deg;C
+        </div>
+        <div>
+          <h6>MON</h6>
+          <i class="fa-solid fa-cloud-showers-water fa-beat"></i
+          ><br /><br />22&deg;C
+        </div>
+        <div>
+          <h6>TUE</h6>
+          <i class="fa-solid fa-cloud-showers-heavy fa-beat"></i
+          ><br /><br />23&deg;C
+        </div>
+        <div>
+          <h6>WED</h6>
+          <i class="fa-solid fa-cloud-bolt fa-beat"></i><br /><br />18&deg;C
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  // search city
+
+  let APIkey = "48391eebfb038fceaa7ed4a169a0dc60";
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}`;
+
+  // var sevenDay_url = "https://api.openweathermap.org/data/2.5/onecall?lat=28.5703&lon=77.2167&exclude=hourly,minutely&units=metric&appid=dd7fa73e412e7d4b26a84b058a427602&cnt=5"
+  let main = document.getElementsByClassName("weather");
+
+  const weatherApiCall = async () => {
+    let city = document.getElementById("city").value;
+    // let celsius = (fahrenheit - 32) * 5/9;
+    let data = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=48391eebfb038fceaa7ed4a169a0dc60&cnt=5`
+    );
+    // https://api.openweathermap.org/data/2.5/weather?q=delhi&appid=740f85f5dcd4077ed0e1afaec2f82063&units=metric
+    const res = await data.json();
+    var h5 = document.getElementById("ranjay");
+    h5.innerText = res.name;
+    // let div = document.getElementById('temp')
+    //   div.innerText=res.main.temp
+    // let press = document.getElementById('pressure')
+    // press.innerHTML=`Pressure:${res.main.pressure}`
+
+    console.log(res);
+    // console.log(res.weather[0].main);
+
+
+    let ress = await fetch(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${res.coord.lat}&lon=${res.coord.lon}&exclude=hourly,minutely&units=metric&appid=dd7fa73e412e7d4b26a84b058a427602`
+    );
+    let datas = await ress.json();
+    console.log(datas);
+    datas.daily.map(function (weather) {
+      let div = document.getElementById("temp");
+      div.innerHTML = `${Math.round(datas.current.temp)}&deg;C`;
+      let press = document.getElementById("pressure");
+      press.innerHTML = `Pressure:${datas.current.pressure}`;
+      let wind = document.getElementById("wind");
+      wind.innerHTML = `wind:${datas.current.wind_speed} km/ph`;
+      let humidity = document.getElementById("humidity");
+      humidity.innerHTML = `Humidity:${datas.current.humidity} g.m-3`;
+
+      if(res.weather[0].main=="Clouds"){
+        let sundegree=document.getElementsByClassName(".sundegree");
+      let sunpara=document.querySelector("p");
+      sunpara.innerHTML=`<i class="fa-solid fa-cloud-moon-rain"></i>`
+      }
+      else if(res.weather[0].main=="Rain"){
+        let sundegree=document.getElementsByClassName(".sundegree");
+      let sunpara=document.querySelector("p");
+      sunpara.innerHTML=`<i class="fa-solid fa-cloud-rain fa-beat-fade" style="color: #0a5ae6;"></i>`
+      }
+      else if(res.weather[0].main=="Clear"){
+        let sundegree=document.getElementsByClassName(".sundegree");
+      let sunpara=document.querySelector("p");
+      sunpara.innerHTML=`<i class="fa-solid fa-sun fa-spin" style="color: #f7b708;"></i>`
+      }
+      
+
+      let dt = document.getElementById("dt");
+      const dd = new Date();
+      dt.innerHTML = `${dd.toLocaleString()}`;
+      // let date = document.getElementById("weekDay");
+      // let Days = ["sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      // let da = new Date();
+      // date.innerHTML = `${Days[da.getDay()]}`;
+    });
+
+  };
+</script>

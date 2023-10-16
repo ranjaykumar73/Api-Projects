@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    #product{
+        display: grid;
+        grid-template-columns: repeat(4, 20%);
+        gap: 5%; 
+    }
+    img{
+        width: 60%;
+    }
+    </style>
+</head>
+<body>
+    
+    <div id="product"></div>
+   
+</body>
+</html>
+<script>
+    let url =`https://fakestoreapi.com/products`
+    let main = document.getElementById('product')
+    
+    // async function productDetails(){
+    //     let promiseData = await fetch(url);
+    //     console.log(promiseData);
+    //     let data = await promiseData.json();
+    //     console.log(data);
+    //     appendData(data); 
+    // }
+
+    fetch(url).then(function(respone)
+    {
+        return respone.json()
+    }).then(function(responcedata)
+    {
+       // console.log(responcedata);
+        appendData(responcedata)
+    }).catch(function(err)
+    {
+        console.log("err");
+    })
+    
+
+    function appendData(products){
+        products.forEach(function (product){
+            let div = document.createElement('div')
+            let img = document.createElement('img')
+            img.src = product.image;
+
+            let title = document.createElement('p')
+             title.innerHTML = product.title;
+
+             let price = document.createElement('h2')
+             price.innerHTML = product.price;
+
+             let description = document.createElement('p')
+             description.innerHTML = product.description;
+
+             let category = document.createElement('p')
+             category.innerHTML = product.category;
+
+             let id = document.createElement('p')
+             id.innerHTML = product.id;
+
+             let rating = document.createElement('h3')
+             rating.innerHTML = product.rating.rate;
+
+             let count = document.createElement('h3')
+             count.innerHTML = product.rating.count;
+
+
+            div.append(img,title,price,category,id,rating,count)
+            main.append(div)
+        })
+
+    }
+   
+    
+
+</script>

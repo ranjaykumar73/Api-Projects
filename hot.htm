@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotstar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+    *{
+        padding: 0%;
+    
+    }
+#search{
+    width: 80%;
+    height: 60px;
+    border: 4px solid black;
+    border-radius: 10px;
+    margin-left: 145px;
+    font-size: large;
+    font-weight: 400;
+    padding-left: 80px;
+    margin-top: 20px;
+    color:white;
+    background-color: #000000;
+}
+
+
+.icon {
+    margin-top: 50px;
+    width: 100px;
+border: 1px solid black;
+height: 500px;
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+padding-left: 50px;
+font-size: xx-large;
+
+
+}
+#icons{
+    /* margin-left: 140px;  */
+}
+#popular{
+    margin-top: 50px;
+    width: 86%;
+    height: 570px;
+    border: 2px solid black;
+    display: flex;
+   overflow: unset;
+   display: grid;
+   grid-template-columns: repeat(4,20%);
+   gap: 15px;    
+}
+img{
+    width: 60%;
+}
+.main {
+     display: flex; 
+    gap: 2.5%;
+    width: 1400px;
+    grid-row: (4,15%);
+
+}
+body{
+    background-color: rgb(28, 58, 141);
+}
+</style>
+<body>
+    <i id="icons" class="fa-solid fa-magnifying-glass fa-2xl" style="color: #000000;"></i>
+    <input id="search" type="text" placeholder="Movies,shows and more" oninput="debounce(showresponse,2000)">
+    <div class="main">
+        <div class="icon">
+            <i class="fa-solid fa-user-plus fa-lg"></i>
+            <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+            <i class="fa-solid fa-house fa-lg"></i>
+            <i class="fa-solid fa-tv"></i>
+            <i class="fa-solid fa-video fa-lg"></i>
+            <i class="fa-solid fa-baseball fa-lg"></i>
+        </div>
+
+        <div id="popular"></div>
+
+    </div>
+</body>
+</html>
+<script>
+    //let apikey = "c198abf"
+    let fun
+    let moviesection = document.getElementById("popular");
+
+    async function searchmovie() {
+        //document.getElementById("search");
+        let name = document.getElementById("search").value
+        let url = (`http://www.omdbapi.com/?s=${name}&apikey=c198abf`);
+        
+        let response = await fetch(url);
+        let data = await response.json();
+        console.log(data)
+        return data.Search
+    }
+    async function showresponse() {
+        moviesection.innerHTML = null;
+        let showdata = await searchmovie();
+        if (showdata === undefined) {
+            return false
+        };
+        showdata.map(function (movie) {
+            let popular = document.getElementById("popular")
+            let postermovie = document.createElement('div')
+            let img = document.createElement('img');
+            img.style.height = "80%"
+            img.src = movie.Poster;
+            let title = document.createElement('p');
+            title.innerHTML = movie.Title;
+            postermovie.append(img, title);
+            moviesection.append(postermovie)
+        })
+        console.log(showdata)
+    }
+    function debounce(functional, delay) {
+        clearTimeout(fun)
+        id = setTimeout(function () {
+            functional()
+        }, delay)
+    }
+</script>

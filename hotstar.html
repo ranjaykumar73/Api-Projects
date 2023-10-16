@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="hotstar.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+   
+  </head>
+  <body>
+    <div id="logo">
+      <input type="text" placeholder="Movies, shows and more" id="searchBar" oninput="showMovies()">
+    </div>
+    <nav id="navbar">
+      <div id="My_space">
+        <img
+        src="https://img1.hotstarext.com/image/upload/w_201,h_200,c_fill/v1/feature/profile/38.png"
+        decoding="async" loading="lazy" alt="Avatar" style="object-fit: cover;
+        width: 30px; height: 30px;"/>
+      </div> 
+      <br /><br />
+      <div id="Search">
+        <i class="fa-solid fa-magnifying-glass" style="color: #4676c8"></i>
+      </div>
+      <br /><br />
+      <div id="Home"><i class="fa-solid fa-house"></i></div>
+      <br /><br />
+      <div id="Tv"><i class="fa-solid fa-tv"></i></div>
+      <br /><br />
+      <div id="Movies"><i class="fa-solid fa-video"></i></div>
+      <br /><br />
+      <div id="Sports"><i class="fa-solid fa-volleyball"></i></div>
+      <br /><br />
+    </nav>
+    <div id="card"></div>
+    <script src="hotstar.js"></script>
+  </body>
+</html>
+<script>
+  // let mainDiv = document.getElementById("card");
+  // //     let APIkey = "c0ea8759"
+  // //    let url = `http://www.omdbapi.com/?s=${name}&APIkey=c0ea8759`
+  // //let movie_div = document.getElementById('card')
+  // //    http://www.omdbapi.com/?i=tt3896198&apikey=c0ea8759
+
+  // async function searchMovies() {
+  //   let name = document.getElementById("searchBar").value;
+  //   let response = await fetch(
+  //     `http://www.omdbapi.com/?s=${name}&apikey=c0ea8759`
+  //   );
+  //   let data = await response.json();
+  //   //console.log(data);
+  //   return data.Search;
+  // }
+
+  // async function showMovies() {
+  //   mainDiv.innerHTML = null;
+  //   let showData = await searchMovies();
+  //   console.log(showData);
+
+  //   showData.map(function (movie) {
+  //     let poster = document.createElement("div");
+  //     let img = document.createElement("img");
+  //     img.src = movie.Poster;
+  //     let tiltle = document.createElement("p");
+  //     tiltle.innerHTML = movie.Title;
+
+  //     poster.append(img, tiltle);
+  //     mainDiv.append(poster);
+  //   });
+  //   // console.log(showData)
+  // }
+
+  // function firstdiv(){
+
+  // }
+  // firstdiv()
+</script>
