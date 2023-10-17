@@ -12,19 +12,32 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-   
   </head>
   <body>
     <div id="logo">
-      <input type="text" placeholder="Movies, shows and more" id="searchBar" oninput="showMovies()">
+      <img
+        alt="Disney+ Hotstar"
+        src="https://img.hotstar.com/image/upload/v1656431456/web-images/logo-d-plus.svg"
+        class=""
+        aria-hidden="false"
+      />
+      <input
+        type="text"
+        placeholder="Movies, shows and more"
+        id="searchBar"
+        oninput="debounce(showMovies,2000)"
+      />
     </div>
     <nav id="navbar">
       <div id="My_space">
         <img
-        src="https://img1.hotstarext.com/image/upload/w_201,h_200,c_fill/v1/feature/profile/38.png"
-        decoding="async" loading="lazy" alt="Avatar" style="object-fit: cover;
-        width: 30px; height: 30px;"/>
-      </div> 
+          src="https://img1.hotstarext.com/image/upload/w_201,h_200,c_fill/v1/feature/profile/38.png"
+          decoding="async"
+          loading="lazy"
+          alt="Avatar"
+          style="object-fit: cover; width: 30px; height: 30px"
+        />
+      </div>
       <br /><br />
       <div id="Search">
         <i class="fa-solid fa-magnifying-glass" style="color: #4676c8"></i>
@@ -39,7 +52,11 @@
       <div id="Sports"><i class="fa-solid fa-volleyball"></i></div>
       <br /><br />
     </nav>
-    <div id="card"></div>
+    <div id="grid">
+      <div id="card"></div>
+      <h2 style="margin-left: 100px; color: aliceblue">Latest Movies</h2>
+      <div id="movie"></div>
+    </div>
     <script src="hotstar.js"></script>
   </body>
 </html>

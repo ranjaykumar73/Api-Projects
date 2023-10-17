@@ -16,46 +16,46 @@ img{
 <body>
     <div>
         <!-- <input type="text" placeholder="search here" id="searchBar" oninput="searchMovie()"> -->
-        <div id="movie"></div>
+        <!-- <div id="movie"></div> -->
     </div>
 </body>
 </html>
 <script>
     // let API_KEY = `8796761f365f22339c5a4afba8f4f14b`
-    let url = `https://api.themoviedb.org/3/discover/movie?&api_key=8796761f365f22339c5a4afba8f4f14b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=2`
+    // let url = `https://api.themoviedb.org/3/discover/movie?&api_key=8796761f365f22339c5a4afba8f4f14b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=2`
 
-    let mainDiv = document.getElementById('movie')
+    // let mainDiv = document.getElementById('movie')
 
-      async  function searchMovie(){
-            // let name = document.getElementById('searchBar').value
-            let response = await fetch(url)
-            let data = await response.json()
-            console.log(data)
-            return data.results
+    //   async  function searchMovie(){
+    //         // let name = document.getElementById('searchBar').value
+    //         let response = await fetch(url)
+    //         let data = await response.json()
+    //         console.log(data)
+    //         return data.results
 
             
-            let datas = await imgpath.json()
-            console.log(datas)
-        }
+    //         let datas = await imgpath.json()
+    //         console.log(datas)
+    //     }
         
-        async function showMovie(){
-            let showData = await searchMovie()
-            console.log(showData)
+    //     async function showMovie(){
+    //         let showData = await searchMovie()
+    //         console.log(showData)
             
-            showData.map(function(movies){
-                console.log(movies)
-                let poster = document.createElement('div')
-                let img = document.createElement('img')
-                const imgpath = movies.poster_path
-                 img.src = `https://image.tmdb.org/t/p/original/${imgpath}`
-                let title = document.createElement('p')
-                title.innerHTML = movies.title
+    //         showData.map(function(movies){
+    //             console.log(movies)
+    //             let poster = document.createElement('div')
+    //             let img = document.createElement('img')
+    //             const imgpath = movies.poster_path
+    //              img.src = `https://image.tmdb.org/t/p/original/${imgpath}`
+    //             let title = document.createElement('p')
+    //             title.innerHTML = movies.title
                 
-               poster.append(img,title)
-               mainDiv.append(poster)
+    //            poster.append(img,title)
+    //            mainDiv.append(poster)
 
-            })
-        }
-        showMovie()
+    //         })
+    //     }
+    //     showMovie()
 
 </script>
