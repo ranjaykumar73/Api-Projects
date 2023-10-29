@@ -136,33 +136,12 @@
       dt.innerHTML = `${dd.toLocaleString()}`;
       const day = dd.getDay()
       console.log('day', day)
-      // let date = document.getElementById("weekDay");
-      // let Days = ["sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      // let da = new Date();
-      // date.innerHTML = `${Days[da.getDay()]}`;
-      // const arr = ["sun", "mon", "tue", "wed", "thur", "fri", "sat"];
-      // let m = 3;
-      // let i = m + 1;
-      // let count = 0
-
-      // while (i !== m || count === 0) {
-      //   if (count < 5) {
-      //     const day = document.getElementsByClassName(`weekDay${i}`);
-      //     console.log(
-      //       "temp" + datas.daily[i].temp.day + "count" + count + "i" + i
-      //     );
-      //     day.innerHTML = `${datas.daily[i].temp.day} and ${arr[i]}`;
-      //     i = (i + 1) % arr.length;
-      //     count++;
-      //   } else {
-      //     break;
-      //   }
-      // }
-      const arr = ["sun", "mon", "tue", "wed", "thur", "fri", "sat"];
+   
+      const arr = ["SUN", "MON", "TUE", "WED", "THUR", "FRI", "SAT"];
 
       let count = 0;
       let i = day + 1;
-
+      daily.innerHTML=null;
       while (count < arr.length-1) {
         //const day = document.getElementsByClassName(`weekDay${i}`);
         const dailyDiv = document.getElementById('daily')
