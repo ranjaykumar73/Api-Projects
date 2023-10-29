@@ -33,6 +33,7 @@ body{
     margin-top: 20px;
     margin-top: 20px;
     margin-left: 20px;
+    cursor: pointer;
     /* border: 2px solid red; */
     width: 30px;
     /* overflow: hidden; */
@@ -81,6 +82,8 @@ img{
 /* img{
     width: 60%;
 } */
+
+
 nav:hover{
     color: red;
 }

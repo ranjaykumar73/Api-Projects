@@ -31,7 +31,9 @@
       <h5 id="ranjay"></h5>
       <div class="sundegree">
         <div>
-          <p><i class="fa-solid fa-sun fa-spin fa-xl" style="color: #f9f106"></i></p>
+          <p>
+            <i class="fa-solid fa-sun fa-spin fa-xl" style="color: #f9f106"></i>
+          </p>
         </div>
         <div id="temp">24&deg;C</div>
         <div class="wind">
@@ -42,29 +44,7 @@
         </div>
       </div>
       <br /><br />
-      <div class="weekDay">
-        <div>
-          <h6>SAT</h6>
-          <i class="fa-solid fa-cloud-sun-rain fa-beat"></i><br /><br />20&deg;C
-        </div>
-        <div>
-          <h6>SUN</h6>
-          <i class="fa-solid fa-cloud-sun fa-beat-fade"></i><br /><br />20&deg;C
-        </div>
-        <div>
-          <h6>MON</h6>
-          <i class="fa-solid fa-cloud-showers-water fa-beat"></i
-          ><br /><br />22&deg;C
-        </div>
-        <div>
-          <h6>TUE</h6>
-          <i class="fa-solid fa-cloud-showers-heavy fa-beat"></i
-          ><br /><br />23&deg;C
-        </div>
-        <div>
-          <h6>WED</h6>
-          <i class="fa-solid fa-cloud-bolt fa-beat"></i><br /><br />18&deg;C
-        </div>
+      <div id="daily">
       </div>
     </div>
   </body>
@@ -86,24 +66,23 @@
     );
     // https://api.openweathermap.org/data/2.5/weather?q=delhi&appid=740f85f5dcd4077ed0e1afaec2f82063&units=metric
     const res = await data.json();
-    var h5 = document.getElementById("ranjay");
+    let h5 = document.getElementById("ranjay");
     h5.innerText = res.name;
     // let div = document.getElementById('temp')
     //   div.innerText=res.main.temp
     // let press = document.getElementById('pressure')
     // press.innerHTML=`Pressure:${res.main.pressure}`
 
-    console.log(res);
+    // console.log(res);
     // console.log(res.weather[0].main);
-
 
     let ress = await fetch(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${res.coord.lat}&lon=${res.coord.lon}&exclude=hourly,minutely&units=metric&appid=dd7fa73e412e7d4b26a84b058a427602`
     );
     let datas = await ress.json();
-    console.log(datas);
-    datas.daily.map(function (weather) {
-      let div = document.getElementById("temp");
+    console.log(datas, 'datas');
+    ////////////////////////////////////////////////
+    let div = document.getElementById("temp");
       div.innerHTML = `${Math.round(datas.current.temp)}&deg;C`;
       let press = document.getElementById("pressure");
       press.innerHTML = `Pressure:${datas.current.pressure}`;
@@ -111,32 +90,92 @@
       wind.innerHTML = `wind:${datas.current.wind_speed} km/ph`;
       let humidity = document.getElementById("humidity");
       humidity.innerHTML = `Humidity:${datas.current.humidity} g.m-3`;
+    //////////////////////////////////////////////
 
-      if(res.weather[0].main=="Clouds"){
-        let sundegree=document.getElementsByClassName(".sundegree");
-      let sunpara=document.querySelector("p");
-      sunpara.innerHTML=`<i class="fa-solid fa-cloud-moon-rain"></i>`
+    if (res.weather[0].main == "Clouds") {
+        let sundegree = document.getElementsByClassName(".sundegree");
+        let sunpara = document.querySelector("p");
+        sunpara.innerHTML = `<i class="fa-solid fa-cloud-moon-rain"></i>`;
+      } else if (res.weather[0].main == "Rain") {
+        let sundegree = document.getElementsByClassName(".sundegree");
+        let sunpara = document.querySelector("p");
+        sunpara.innerHTML = `<i class="fa-solid fa-cloud-rain fa-beat-fade" style="color: #0a5ae6;"></i>`;
+      } else if (res.weather[0].main == "Clear") {
+        let sundegree = document.getElementsByClassName(".sundegree");
+        let sunpara = document.querySelector("p");
+        sunpara.innerHTML = `<i class="fa-solid fa-sun fa-spin" style="color: #f7b708;"></i>`;
       }
-      else if(res.weather[0].main=="Rain"){
-        let sundegree=document.getElementsByClassName(".sundegree");
-      let sunpara=document.querySelector("p");
-      sunpara.innerHTML=`<i class="fa-solid fa-cloud-rain fa-beat-fade" style="color: #0a5ae6;"></i>`
-      }
-      else if(res.weather[0].main=="Clear"){
-        let sundegree=document.getElementsByClassName(".sundegree");
-      let sunpara=document.querySelector("p");
-      sunpara.innerHTML=`<i class="fa-solid fa-sun fa-spin" style="color: #f7b708;"></i>`
-      }
-      
+    //////////////////////////////////////////////////
+    // datas.daily.map(function (weather) {
+      // console.log(weather, 'wather daily')
+      // let div = document.getElementById("temp");
+      // div.innerHTML = `${Math.round(datas.current.temp)}&deg;C`;
+      // let press = document.getElementById("pressure");
+      // press.innerHTML = `Pressure:${datas.current.pressure}`;
+      // let wind = document.getElementById("wind");
+      // wind.innerHTML = `wind:${datas.current.wind_speed} km/ph`;
+      // let humidity = document.getElementById("humidity");
+      // humidity.innerHTML = `Humidity:${datas.current.humidity} g.m-3`;
+
+      // if (res.weather[0].main == "Clouds") {
+      //   let sundegree = document.getElementsByClassName(".sundegree");
+      //   let sunpara = document.querySelector("p");
+      //   sunpara.innerHTML = `<i class="fa-solid fa-cloud-moon-rain"></i>`;
+      // } else if (res.weather[0].main == "Rain") {
+      //   let sundegree = document.getElementsByClassName(".sundegree");
+      //   let sunpara = document.querySelector("p");
+      //   sunpara.innerHTML = `<i class="fa-solid fa-cloud-rain fa-beat-fade" style="color: #0a5ae6;"></i>`;
+      // } else if (res.weather[0].main == "Clear") {
+      //   let sundegree = document.getElementsByClassName(".sundegree");
+      //   let sunpara = document.querySelector("p");
+      //   sunpara.innerHTML = `<i class="fa-solid fa-sun fa-spin" style="color: #f7b708;"></i>`;
+      // }
 
       let dt = document.getElementById("dt");
-      const dd = new Date();
+      const dd = new Date(datas.current.dt* 1000);
       dt.innerHTML = `${dd.toLocaleString()}`;
+      const day = dd.getDay()
+      console.log('day', day)
       // let date = document.getElementById("weekDay");
       // let Days = ["sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
       // let da = new Date();
       // date.innerHTML = `${Days[da.getDay()]}`;
-    });
+      // const arr = ["sun", "mon", "tue", "wed", "thur", "fri", "sat"];
+      // let m = 3;
+      // let i = m + 1;
+      // let count = 0
 
+      // while (i !== m || count === 0) {
+      //   if (count < 5) {
+      //     const day = document.getElementsByClassName(`weekDay${i}`);
+      //     console.log(
+      //       "temp" + datas.daily[i].temp.day + "count" + count + "i" + i
+      //     );
+      //     day.innerHTML = `${datas.daily[i].temp.day} and ${arr[i]}`;
+      //     i = (i + 1) % arr.length;
+      //     count++;
+      //   } else {
+      //     break;
+      //   }
+      // }
+      const arr = ["sun", "mon", "tue", "wed", "thur", "fri", "sat"];
+
+      let count = 0;
+      let i = day + 1;
+
+      while (count < arr.length-1) {
+        //const day = document.getElementsByClassName(`weekDay${i}`);
+        const dailyDiv = document.getElementById('daily')
+        // console.log(day, 'before day')
+        // console.log(
+        //   "temp" + datas.daily[i].temp.day + "count" + count + "i" + i
+        // );
+        daily.innerHTML += `<div><h6>${arr[i]}</h6>
+          <i class="fa-solid fa-cloud-sun-rain fa-beat"></i><br /><br />${datas.daily[i].temp.day}&deg;C</div>`;
+        // console.log('after', day)
+        i = (i + 1) % arr.length;
+        count++;
+      }
+    // });
   };
 </script>

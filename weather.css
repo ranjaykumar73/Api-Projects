@@ -40,7 +40,7 @@ body {
 .wind{
     margin-top: -20px;
 }
-.weekDay{
+#daily{
     display: flex;
     justify-content: space-evenly;
 }
